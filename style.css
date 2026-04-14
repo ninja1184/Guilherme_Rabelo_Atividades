@@ -1,0 +1,395 @@
+/* =========================================
+   VARIÁVEIS DE CORES (Paleta do Site)
+   ========================================= */
+:root {
+    /* Cores do Dark Mode (Padrão) */
+    --bg-color: #0b0f19;      /* Fundo escuro principal da tela */
+    --bg-card: #151b2b;       /* Fundo das caixas/cartões (um pouco mais claro pra destacar) */
+    --text-color: #a0aec0;    /* Cor do texto comum (cinza claro pra não doer os olhos) */
+    --title-color: #ffffff;   /* Cor dos títulos (branco puro) */
+    
+    /* Cores de Destaque */
+    --accent-color: #f6ad55;  /* O laranja principal do site (botões, ícones, detalhes) */
+    --accent-hover: #dd6b20;  /* Laranja mais escuro pra quando passar o mouse por cima */
+    --border-color: #2d3748;  /* Cor das linhas sutis que separam as seções */
+    
+    /* Configurações Gerais */
+    --font-main: 'Inter', sans-serif; /* A fonte importada do Google */
+    --transition: all 0.3s ease;      /* Tempo padrão de animações (0.3 segundos, suave) */
+}
+
+/* Cores do Light Mode.
+   Quando o JavaScript joga essa classe no body, ele sobrescreve as cores acima.
+*/
+.light-mode {
+    --bg-color: #f7fafc;      /* Fundo claro */
+    --bg-card: #ffffff;       /* Cartões brancos */
+    --text-color: #4a5568;    /* Texto cinza escuro pra dar leitura no fundo claro */
+    --title-color: #1a202c;   /* Títulos quase pretos */
+    --accent-color: #dd6b20;  /* Laranja um pouco mais forte pra dar contraste no branco */
+    --accent-hover: #c05621;
+    --border-color: #e2e8f0;
+}
+
+/* =========================================
+   RESET CSS (Limpando sujeira do navegador)
+   ========================================= */
+* {
+    margin: 0;                /* Tira as margens que os navegadores botam por padrão */
+    padding: 0;               /* Tira os espaçamentos internos padrão */
+    box-sizing: border-box;   /* Faz com que bordas e paddings não aumentem o tamanho total das caixas */
+    font-family: var(--font-main); /* Aplica a fonte Inter em tudo */
+}
+
+html {
+    scroll-behavior: smooth;  /* Faz a tela deslizar macio quando clica num link do menu, em vez de pular */
+}
+
+body {
+    background-color: var(--bg-color); /* Pinta o fundo com a variável de cor */
+    color: var(--text-color);          /* Pinta os textos com a variável de cor */
+    transition: var(--transition);     /* Faz a troca dark/light mode ser suave */
+    overflow-x: hidden;                /* Corta qualquer coisa que vaze pros lados (evita a barra de rolagem horizontal feia) */
+}
+
+/* =========================================
+   HEADER (Menu Superior)
+   ========================================= */
+header {
+    position: fixed;          /* Prega o menu no topo da tela. Ele vai descer junto com o scroll */
+    top: 0;
+    width: 100%;              /* Ocupa a tela toda de ponta a ponta */
+    display: flex;            /* Coloca Logo, Menu e Botão lado a lado na mesma linha */
+    justify-content: space-between; /* Empurra um item pra cada canto */
+    align-items: center;      /* Alinha os itens verticalmente no meio */
+    padding: 20px 5%;         /* 20px de altura, 5% de respiro nas laterais */
+    background-color: rgba(11, 15, 25, 0.95); /* Fundo quase sólido (95% opaco) */
+    backdrop-filter: blur(10px); /* O efeito mágico: borra o que passar por trás do menu (efeito vidro) */
+    z-index: 1000;            /* Garante que o menu vai ficar sempre por cima de tudo no site */
+    border-bottom: 1px solid var(--border-color); /* Linha divisória embaixo do menu */
+}
+
+/* Ajusta a cor do vidro no modo claro */
+.light-mode header {
+    background-color: rgba(247, 250, 252, 0.95);
+}
+
+.logo h2 {
+    color: var(--title-color);
+    font-size: 1.5rem;
+    font-weight: 700;         /* Deixa a fonte grossa (bold) */
+    letter-spacing: 1px;      /* Dá um leve espaço entre as letras da logo */
+}
+
+.logo span {
+    color: var(--accent-color); /* Pinta só o ".DEV" de laranja */
+}
+
+nav ul {
+    list-style: none;         /* Tira as bolinhas da lista do menu */
+    display: flex;            /* Coloca os links do menu lado a lado */
+    gap: 30px;                /* Dá 30px de espaço entre cada link do menu */
+}
+
+nav a {
+    text-decoration: none;    /* Tira aquele sublinhado feio dos links */
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition); /* Suaviza a mudança de cor ao passar o mouse */
+}
+
+nav a:hover {
+    color: var(--accent-color); /* Fica laranja quando o mouse passa por cima */
+}
+
+/* Ícone de Dark/Light Mode */
+.theme-toggle {
+    cursor: pointer;          /* Transforma o mouse numa mãozinha indicando que é clicável */
+    font-size: 1.5rem;
+    color: var(--title-color);
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    color: var(--accent-color);
+}
+
+/* =========================================
+   ESTRUTURA GERAL DAS SEÇÕES
+   ========================================= */
+section {
+    padding: 100px 5% 50px;   /* 100px em cima (pra não bater no menu fixo), 5% dos lados, 50px embaixo */
+    min-height: 100vh;        /* Cada seção ocupa no mínimo 100% da altura da tela (vh = viewport height) */
+    display: flex;            /* Prepara a seção pra organizar os itens dentro dela */
+    flex-direction: column;   /* Empilha os itens de cima pra baixo (título, depois conteúdo) */
+    justify-content: center;  /* Centraliza o bloco inteiro no meio da tela */
+}
+
+.section-title {
+    color: var(--title-color);
+    font-size: 2.5rem;
+    margin-bottom: 40px;      /* Espaço entre o título e os cartões */
+    text-align: center;       /* Centraliza o texto */
+}
+
+/* =========================================
+   HERO (Primeira Tela do Site)
+   ========================================= */
+.hero {
+    display: flex;            /* Ativa o flexbox */
+    flex-direction: row;      /* Coloca o bloco de texto de um lado e a foto do outro */
+    justify-content: space-between; /* Joga o texto pra esquerda e foto pra direita */
+    align-items: center;      /* Alinha os dois no meio da altura */
+    min-height: 100vh;
+    padding-top: 120px;       /* Um pouco mais de espaço em cima por causa do menu */
+}
+
+.hero-content {
+    max-width: 600px;         /* O texto não passa dessa largura pra não ficar uma tripa na tela */
+}
+
+.saudacao {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;           /* Força a saudação a ocupar uma linha inteira sozinha */
+}
+
+.hero-content h1 {
+    color: var(--title-color);
+    font-size: 3.5rem;
+    line-height: 1.2;         /* Altura da linha do texto. 1.2 é bom pra títulos grandes */
+    margin-bottom: 20px;
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    line-height: 1.6;         /* Espaçamento maior pra facilitar a leitura do parágrafo */
+    margin-bottom: 40px;
+}
+
+/* Botões da tela inicial */
+.botoes-hero {
+    display: flex;
+    gap: 20px;                /* Espaço de 20px entre o botão primário e o secundário */
+    margin-bottom: 40px;
+}
+
+.btn {
+    padding: 15px 30px;       /* 15px de altura interna, 30px de largura interna (deixa o botão gordinho) */
+    border-radius: 8px;       /* Arredonda as pontas do botão */
+    text-decoration: none;    /* Tira sublinhado do link */
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition); /* Efeito suave no hover */
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--accent-color); /* Fundo laranja */
+    color: #fff;                           /* Texto branco */
+    border: 2px solid var(--accent-color); /* Bordinha laranja pra manter o tamanho no hover */
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover); /* Escurece o laranja quando o mouse passa */
+    border-color: var(--accent-hover);
+}
+
+.btn-outline {
+    border: 2px solid var(--accent-color); /* Botão vazado, só com a borda laranja */
+    color: var(--accent-color);            /* Texto laranja */
+    background: transparent;               /* Fundo transparente */
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-color); /* Quando passa o mouse, ele pinta o fundo de laranja */
+    color: #fff;                           /* E o texto fica branco */
+}
+
+/* Redes Sociais embaixo dos botões */
+.redes-sociais {
+    display: flex;
+    gap: 20px;
+}
+
+.redes-sociais a {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.redes-sociais a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px); /* Efeito legal: o ícone dá um pulinho de 3px pra cima no hover */
+}
+
+/* A caixa da sua foto */
+.hero-image {
+    flex: 1;                  /* Pega o espaço que sobrar da linha */
+    display: flex;
+    justify-content: center;  /* Centraliza a foto dentro da própria caixa dela */
+}
+
+.hero-image img {
+    width: 100%;              /* A imagem tenta ocupar todo o espaço possível... */
+    max-width: 450px;         /* ...mas bate no teto de 450px pra não ficar gigante */
+    border-radius: 20px;      /* Bordas bem redondas na foto */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Uma sombra escura e difusa pra dar profundidade */
+    border: 2px solid var(--border-color);   /* Uma linha em volta da foto pra acabamento */
+}
+
+/* =========================================
+   MARQUEE (Carrossel Infinito das Linguagens)
+   ========================================= */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;         /* A MAGIA ACONTECE AQUI: Corta/esconde a fita que sai da tela */
+    background-color: var(--bg-card); /* Fundo da barra */
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+}
+
+.marquee-content {
+    display: flex;
+    white-space: nowrap;      /* Força os ícones a ficarem em uma linha única, proibindo pular linha */
+    animation: scroll 15s linear infinite; /* Chama a animação 'scroll', dura 15s, velocidade linear, pra sempre */
+}
+
+.marquee-content i {
+    font-size: 2.5rem;        /* Tamanho dos ícones do HTML, CSS, JS... */
+    display: flex;
+    align-items: center;
+}
+
+.marquee-content span {
+    font-size: 1.2rem; 
+    font-weight: bold;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    margin-left: 10px;        /* Espaço entre o ícone e o nome (Ex: [Icone] 10px HTML) */
+    margin-right: 50px;       /* Espaço entre o nome e a próxima linguagem */
+}
+
+/* A Animação em si */
+@keyframes scroll {
+    0% { transform: translateX(0); }         /* Começa no ponto zero */
+    100% { transform: translateX(-50%); }    /* Termina empurrando 50% da fita pra esquerda, reiniciando o loop invisível */
+}
+
+/* =========================================
+   CARTÕES (Serviços e Soft Skills)
+   ========================================= */
+.grid-cards {
+    display: grid;            /* Cria uma malha/grid pra colocar os cartões */
+    
+    /* auto-fit preenche as colunas sozinho. 
+       minmax(280px, 1fr) diz: a coluna tem que ter no mínimo 280px. Se sobrar espaço, divida por igual (1fr). */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;                /* Distância de 30px entre um cartão e outro */
+    width: 100%;
+}
+
+.card {
+    background-color: var(--bg-card); /* Fundo da caixinha */
+    padding: 30px;            /* Espaço interno pra não grudar nas bordas */
+    border-radius: 12px;      /* Bordas arredondadas */
+    border: 1px solid var(--border-color); /* Borda fina */
+    transition: var(--transition); /* Transição suave pro hover logo abaixo */
+}
+
+.card:hover {
+    border-color: var(--accent-color); /* Borda fica laranja quando passa o mouse */
+    transform: translateY(-5px);       /* O cartão sobe 5px dando a impressão que está sendo clicado/levantado */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Adiciona uma sombra suave ao levantar */
+}
+
+.card i {
+    font-size: 2.5rem;
+    color: var(--accent-color); /* Ícones dos cartões (robô, código) pintados de laranja */
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: var(--title-color);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.card p {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   SOBRE MIM & CURRÍCULO
+   ========================================= */
+.sobre-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* Centraliza tudo da seção sobre mim */
+    text-align: center;
+    max-width: 800px;         /* Limita a largura do texto pra não ficar muito longo de ler */
+    margin: 0 auto;           /* Centraliza a caixa inteira na tela (0 em cima/baixo, Automático nas laterais) */
+}
+
+.sobre-container p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* A área das pílulas de Hard Skills */
+.tags {
+    display: flex;
+    flex-wrap: wrap;          /* Se não couber na linha, joga as tags pra linha de baixo */
+    justify-content: center;
+    gap: 10px;                /* Espaço de 10px entre cada pílula */
+    margin-bottom: 40px;
+}
+
+/* As pílulas em si */
+.tag {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 50px;      /* 50px deixa a borda totalmente redonda, formato de pílula */
+    font-size: 0.9rem;
+    color: var(--title-color);
+}
+
+/* O botãozão gigante de baixar currículo */
+.cv-banner {
+    width: 100%;              /* Ocupa a largura toda disponível do contêiner dele */
+    background-color: var(--accent-color); /* Laranjão chamativo */
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cv-banner:hover {
+    background-color: var(--accent-hover); /* Escurece no hover */
+}
+
+.cv-banner h3 {
+    color: #fff;              /* O texto do botão é branco */
+    font-size: 1.5rem;
+}
+
+/* =========================================
+   RODAPÉ (Footer)
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--bg-card); /* Mesma cor dos cartões pra separar visualmente do fundo da página */
+    border-top: 1px solid var(--border-color); /* Linha divisória em cima */
+    margin-top: 50px;         /* Distância do último bloco do site */
+}
